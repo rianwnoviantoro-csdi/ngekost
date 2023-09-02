@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AccountService } from './account.service';
-import { RegisterRequest } from './register.request';
+import { LoginRequest, RegisterRequest } from './register.request';
 
 @Controller('account')
 export class AccountController {
@@ -18,6 +18,13 @@ export class AccountController {
     @Post('/register')
     async register(@Body() body: RegisterRequest) {
         const result = await this.accountService.register(body)
+
+        return { statusCode: 200, message: 'Success.', data: result }
+    }
+
+    @Post('/login')
+    async login(@Body() body: LoginRequest) {
+        const result = await this.accountService.login(body)
 
         return { statusCode: 200, message: 'Success.', data: result }
     }
