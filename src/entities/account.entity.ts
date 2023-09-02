@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Abstract } from "./abstract.entity";
+import { Landlord } from "./landlord.entity";
 
 @Entity('accounts')
 export class Account extends Abstract<Account> {
@@ -11,4 +12,7 @@ export class Account extends Abstract<Account> {
 
     @Column()
     password: string;
+
+    @OneToOne(() => Landlord, (landlord) => landlord.account)
+    own: Landlord
 }
